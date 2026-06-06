@@ -4,6 +4,11 @@ from app import db
 
 admin_bp = Blueprint('admin', __name__)
 
+@admin_bp.route('/admin')
+def admin():
+    if 'usuario_id' not in session or session['tipo'] != 'admin':
+        return redirect(url_for('auth.login'))
+
 @admin_bp.route('/admin/dashboard')
 def dashboard():
     if 'usuario_id' not in session or session['tipo'] != 'admin':

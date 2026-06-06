@@ -31,6 +31,12 @@ def login():
 
     return render_template('login.html')
 
+@auth_bp.route('/cliente/home')
+def home():
+    if 'usuario_id' not in session or session['tipo'] != 'cliente':
+        return redirect(url_for('auth.login'))
+    return render_template('home.html')
+
 @auth_bp.route('/cadastro', methods=[ 'POST'])
 def cadastro():
     nome = request.form.get('nome')

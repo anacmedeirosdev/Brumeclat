@@ -28,3 +28,12 @@ def dashboard():
     
     meus_agendamentos = Agendamento.query.filter_by(usuario_id=session['usuario_id']).all()
     return render_template('historico.html', agendamentos=meus_agendamentos)
+
+@agendamento_bp.route('/cliente/confirmacao')
+def confirmacao():
+    render_template('confirmacao.html')
+
+@agendamento_bp.route('/cliente/historico')
+def historico():
+    meus_agendamentos = Agendamento.query.filter_by(usuario_id=session['usuario_id']).all()
+    return render_template('historico.html', agendamentos=meus_agendamentos)
