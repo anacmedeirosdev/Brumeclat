@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from werkzeug.security import generate_password_hash
-from app.models.agendamentoo import Agendamento
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from app.models.agendamento import Agendamento
 from app import db
 
 agendamento_bp = Blueprint('agendamento', __name__)

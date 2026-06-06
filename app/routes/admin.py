@@ -1,8 +1,9 @@
-from flask import blueprint, render_template, request, redirect, url_for, flash, session
-from werkzeug.security import generate_password_hash
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from app.models.agendamento import Agendamento
+from app import db
 
 admin_bp = Blueprint('admin', __name__)
+
 @admin_bp.route('/admin/dashboard')
 def dashboard():
     if 'usuario_id' not in session or session['tipo'] != 'admin':

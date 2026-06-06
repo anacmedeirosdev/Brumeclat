@@ -8,9 +8,9 @@ def create_app():
     app.config.from_object('config.Config')
     db.init_app(app)
 
-    from app.routes import auth_bp
-    from app.routes import agendamento_bp
-    from app.routes import admin_bp
+    from app.routes.auth import auth_bp
+    from app.routes.agendamento import agendamento_bp
+    from app.routes.admin import admin_bp
 
 
     app.register_blueprint(auth_bp)
@@ -19,5 +19,5 @@ def create_app():
 
     with app.app_context():
         db.create_all()
-        
+
     return app

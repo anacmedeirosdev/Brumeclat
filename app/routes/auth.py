@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from werkzeug.security import generate_password_hash
+from flask import Blueprint, render_template, request, redirect, url_for, flash,session
+from werkzeug.security import generate_password_hash, check_password_hash
 from app.models.usuario import Usuario
 from app import db
 
@@ -33,12 +33,11 @@ def login():
 
 @auth_bp.route('/cadastro', methods=[ 'POST'])
 def cadastro():
-    
     nome = request.form.get('nome')
     telefone = request.form.get('telefone')
     senha = request.form.get('senha')
 
-    if usuario.query.filter_by(telefone=telefone).first():
+    if Usuario.query.filter_by(telefone=telefone).first():
         flash('Telefone já cadastrado!', 'error')
         return redirect(url_for('auth.login'))
         
