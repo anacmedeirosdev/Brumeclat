@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash,session
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user, logout_user, login_required, current_user
 from app.models.usuario import Usuario
 from app import db
 
@@ -18,10 +19,7 @@ def login():
         usuario = Usuario.query.filter_by(telefone=telefone).first()
 
         if usuario and check_password_hash(usuario.senha, senha):
-            session['usuario_id'] = usuario.id
-            session['tipo'] = usuario.tipo
-            session['senha'] = usuario.senha
-            session['telefone'] = usuario.telefone
+            login_user(usuario)
 
             if usuario.tipo == 'admin':
                 flash('Login realizado com sucesso!', 'success')
@@ -32,10 +30,18 @@ def login():
     return render_template('login.html')
 
 @auth_bp.route('/cliente/home')
+@login_required
 def home():
-    if 'usuario_id' not in session or session['tipo'] != 'cliente':
+    if not current_user.is_authenticated or current_user.tipo != 'cliente':
         return redirect(url_for('auth.login'))
     return render_template('home.html')
+
+@auth_bp.route('/cliente/perfil')
+@login_required
+def perfil():
+    if not current_user.is_authenticated or current_user.tipo != 'cliente':
+        return redirect(url_for('auth.login'))
+    return render_template('perfil.html')
 
 @auth_bp.route('/cadastro', methods=[ 'POST'])
 def cadastro():
@@ -57,5 +63,5 @@ def cadastro():
 
 @auth_bp.route('/logout')
 def logout():
-    session.clear()
+    logout_user()
     return redirect(url_for('auth.login'))
