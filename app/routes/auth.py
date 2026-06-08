@@ -8,7 +8,7 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/')
 def landing_page():
-    return render_template('landinpage.html')
+    return render_template('landingpage.html')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
