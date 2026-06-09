@@ -140,6 +140,7 @@ ul .card{
 }
 .servicos{
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 .servico{

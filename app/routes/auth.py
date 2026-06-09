@@ -12,6 +12,11 @@ def landing_page():
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        if current_user.tipo == 'admin':
+            return redirect(url_for('admin.dashboard'))
+        return render_template('home.html')
+    
     if request.method == 'POST':
         telefone = request.form['telefone']
         senha = request.form['senha']
@@ -22,17 +27,18 @@ def login():
             login_user(usuario)
 
             if usuario.tipo == 'admin':
-                flash('Login realizado com sucesso!', 'success')
                 return redirect(url_for('admin.dashboard'))
+            else:
+                return redirect(url_for('auth.home'))
 
         flash('Telefone ou senha incorretos!', 'error')
 
-    return redirect(url_for('auth.home'))
+    return render_template('login.html')
 
 @auth_bp.route('/cliente/home')
 @login_required
 def home():
-    if not current_user.is_authenticated or current_user.tipo != 'cliente':
+    if current_user.tipo != 'cliente':
         return redirect(url_for('auth.login'))
     return render_template('home.html')
 

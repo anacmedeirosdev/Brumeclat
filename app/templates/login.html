@@ -9,7 +9,7 @@
 <body class="flex login">
     <main class="flex login_card">
         <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Logo">
-        <form class="flex" action="{{url_for('auth.login') }}" methods="POST">
+        <form class="flex" action="{{url_for('auth.login') }}" method="POST">
             <div class="campos flex">
                 <label for="telefone">Telefone/Celular</label>
                 <input class="flex" type="number" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
