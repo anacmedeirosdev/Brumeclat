@@ -89,7 +89,7 @@ main .cards{
 .container{
     max-width: 1281px; 
     margin: 0 auto;
-    gap:24px; 
+    gap:64px; 
 }
 
 h1{
@@ -107,6 +107,8 @@ p{
 }
 
 .card_menor{
+    min-width: 274px;
+    min-height: 132px;
     row-gap: 24px;
     padding: 48px;
 }
@@ -157,6 +159,7 @@ ul .card{
 .servicos span{
     width: 100%;
     row-gap: 16px;
+    flex-direction:column;
     justify-content: flex-end;  
 }
 .servicos div{
@@ -165,13 +168,31 @@ ul .card{
     row-gap: 28px;
     align-items: flex-end;
 }
-button{
-    border: none;
-    padding: 0;
-    background: none;
-}
-button a{
+section div a{
     color: #812B2B;
     background-color: #E6A4A4;
 }
 
+footer p{
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; 
+}
+
+footer div .flex{
+    column-gap: 8px;
+}
+
+footer .infos{
+    flex-direction: column;
+    row-gap: 28px;
+}
+footer{
+    margin-top: 118px;
+    padding: 129px 75px 129px 80px;
+    border-top: 4px solid #F4F4F4;
+    justify-content: space-between;
+    align-items: center;
+}
