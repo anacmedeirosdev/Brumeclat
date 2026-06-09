@@ -27,7 +27,7 @@ def login():
 
         flash('Telefone ou senha incorretos!', 'error')
 
-    return render_template('login.html')
+    return redirect(url_for('auth.home'))
 
 @auth_bp.route('/cliente/home')
 @login_required
@@ -43,23 +43,31 @@ def perfil():
         return redirect(url_for('auth.login'))
     return render_template('perfil.html')
 
-@auth_bp.route('/cadastro', methods=[ 'POST'])
+@auth_bp.route('/cadastro', methods=[ 'GET','POST'])
 def cadastro():
-    nome = request.form.get('nome')
-    telefone = request.form.get('telefone')
-    senha = request.form.get('senha')
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+        telefone = request.form.get('telefone')
+        senha = request.form.get('senha')
+        confirmar_senha = request.form.get('confirmar_senha')
 
-    if Usuario.query.filter_by(telefone=telefone).first():
-        flash('Telefone já cadastrado!', 'error')
-        return redirect(url_for('auth.login'))
+        if senha != confirmar_senha:
+            flash('As senhas não coincidem!', 'error')
+            return render_template('cadastro.html')
+
+        if Usuario.query.filter_by(telefone=telefone).first():
+            flash('Telefone já cadastrado!', 'error')
+            return redirect(url_for('auth.login'))
         
-    senha_hash = generate_password_hash(senha)
-    novo_usuario = Usuario(nome=nome, telefone=telefone, senha=senha_hash)
-    db.session.add(novo_usuario)
-    db.session.commit()
+        senha_hash = generate_password_hash(senha)
+        novo_usuario = Usuario(nome=nome, telefone=telefone, senha=senha_hash)
+        db.session.add(novo_usuario)
+        db.session.commit()
 
-    flash('Cadastro realizado com sucesso! Faça login para continuar.', 'success')
-    return redirect(url_for('auth.login'))
+        flash('Cadastro realizado com sucesso! Faça login para continuar.', 'success')
+        return redirect(url_for('auth.login'))
+    
+    return render_template ('cadastro.html')
 
 @auth_bp.route('/logout')
 def logout():

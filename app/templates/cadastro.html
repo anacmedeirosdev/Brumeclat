@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>cadastro</title>
+</head>
+<body class="flex login">
+    <main class="flex login_card">
+        <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Logo">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alerta-temporario alert-{{ category }}">
+                  {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form class="flex" action="{{ url_for('auth.cadastro') }}" method="POST">
+            
+            <div class="campos flex">
+                <label for="nome">Nome Completo</label>
+                <input class="flex" type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+            </div>
+
+            <div class="campos flex">
+                <label for="telefone">Telefone/Celular</label>
+                <input class="flex" type="number" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+            </div>
+
+            <div class="campos flex">
+                <label for="senha">Sua Senha</label>
+                <input class="flex" type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            </div>
+
+            <div class="campos flex">
+                <label for="confirmar_senha">Confirmar Senha</label>
+                <input class="flex" type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Digite a senha novamente" required>
+            </div>
+
+            <button class="button btn-primario" type="submit">Cadastrar</button>
+        </form>
+        
+        <div class="flex sign">
+            <p>Já tem uma conta?</p>
+            <a class="button" style="background-color: #E6A4A4;" href="{{ url_for('auth.login') }}">Entrar</a>
+        </div>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const alertas = document.querySelectorAll('.alerta-flash');
+            alertas.forEach(function(alerta) {
+                setTimeout(function() {
+                    alerta.style.opacity = '0';
+                    setTimeout(function() {
+                        alerta.remove();
+                    }, 500);
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>

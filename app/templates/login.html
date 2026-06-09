@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Login</title>
 </head>
-<body>
-    <h1>Login</h1>
+<body class="flex login">
+    <main class="flex login_card">
+        <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Logo">
+        <form class="flex" action="{{url_for('auth.login') }}" methods="POST">
+            <div class="campos flex">
+                <label for="telefone">Telefone/Celular</label>
+                <input class="flex" type="number" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+            </div>
+            <div class="campos flex">
+                <label for="senha">Sua Senha</label>
+                <input class="flex" type="password" id="senha" name="senha" placeholder="Digite sua senha" required>        </div>
+            <button class="button" type="submit" class="btn-primario">Entrar</button>
+        </form>
+        <div class="flex sign">
+            <p>Não tem conta?</p>
+            <a class="button" style="background-color: #E6A4A4;" href="{{ url_for('auth.cadastro') }}">Cadastre-se aqui</a>
+        </div>
+    </main>
 </body>
 </html>
