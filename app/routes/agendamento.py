@@ -2,39 +2,44 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from app.models.agendamento import Agendamento
 from flask_login import login_required, current_user
 from app import db
+from datetime import datetime
 
 agendamento_bp = Blueprint('agendamento', __name__)
 
-@agendamento_bp.route('/agendamento', methods=['GET', 'POST'])
-@login_required
-def dashboard():
-    if 'usuario_id' not in session or session['tipo'] != 'cliente':
-        return redirect(url_for('auth.login'))
-
+@agendamento_bp.route('/agendar', methods=['GET', 'POST'])
+def fazer_agendamento():
     if request.method == 'POST':
-        servico = request.form['servico']
-        data = request.form['data']
-        horario = request.form['horario']
+        servico = request.form.get('servico')
+        data = request.form.get('data')
+        horario = request.form.get('horario')
+
+        data = datetime.strptime(data, '%Y-%m-%d').date()
+        horario = datetime.strptime(horario, '%H:%M').time()
 
         novo_agendamento = Agendamento(
             usuario_id=current_user.id,
             servico=servico,
             data=data,
-            horario=horario
+            horario=horario,
+            status='pendente'
         )
+
         db.session.add(novo_agendamento)
         db.session.commit()
 
-        flash('Agendamento realizado com sucesso!', 'success')
-        return redirect(url_for('agendamento.dashboard'))
-    
-    meus_agendamentos = Agendamento.query.filter_by(usuario_id=session['usuario_id']).all()
-    return render_template('historico.html', agendamentos=meus_agendamentos)
+        return redirect(url_for('agendamento.confirmacao'))
+
+    servico_selecionado = request.args.get('servico', '')
+    return render_template('agendar.html', servico_selecionado=servico_selecionado)
+
 
 @agendamento_bp.route('/cliente/confirmacao')
+@login_required
 def confirmacao():
-    render_template('confirmacao.html')
+    return render_template('confirmacao.html')
 
 @agendamento_bp.route('/cliente/historico')
 def historico():
-    meus_agendamentos = Agendamento.query.filter_by(usuario_id=session['usuario_id']).all()
+    meus_agendamentos = Agendamento.query.filter_by(usuario_id=current_user.id).all()
+    return render_template('historico.html', agendamentos=meus_agendamentos)
+

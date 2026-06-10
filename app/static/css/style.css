@@ -142,6 +142,7 @@ ul .card{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    row-gap: 142px;
 }
 .servico{
     padding: 42px 48px;
@@ -275,3 +276,6 @@ button{
         display: none;
     } 
 }
+
+
+

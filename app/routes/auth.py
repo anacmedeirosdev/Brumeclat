@@ -15,7 +15,7 @@ def login():
     if current_user.is_authenticated:
         if current_user.tipo == 'admin':
             return redirect(url_for('admin.dashboard'))
-        return render_template('home.html')
+        return redirect(url_for('auth.home'))
     
     if request.method == 'POST':
         telefone = request.form['telefone']

@@ -1,93 +1,101 @@
 {% extends 'base.html' %}
+{% block navegação %}
+    <li><a class="button" href="{{ url_for('auth.home') }}">Casa</a></li>
+    <li><a class="button" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a></li>
+    <li><a class="button" href="{{ url_for('agendamento.historico') }}">Histórico</a></li>
+{% endblock %}
 {% block conteúdo %}
+    
     <div class="cards container flex">
+        <h1>Serviços Disponíveis</h1>
         <div class="servicos flex">
-        <section class="servico card flex">
-            <img src="static/img/logomaior.svg" alt="Serviços">
-            <div class="flex">
-                <span class="flex">
-                    <h3>Corte de Cabelo</h3>
-                    <p>90 R$</p>
-                </span>
-                <a class="button button_servico" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
-            </div>
-        </section>
+            <section class="servico card flex">
+                <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Serviços">
+                <div class="flex">
+                    <span class="flex">
+                        <h3>Corte de Cabelo</h3>
+                        <p>90 R$</p>
+                    </span>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
+                </div>
+            </section>
 
-        <section class="servico card flex">
-            <img src="static/img/logomaior.svg" alt="Serviços">
-            <div class="flex">
-                <span class="flex">
-                    <h3>Manicure e Pedicure</h3>
-                    <p>65 R$</p>
-                </span>
-                <a class="button button_servico" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
-            </div>
-        </section>
+            <section class="servico card flex">
+                <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Serviços">
+                <div class="flex">
+                    <span class="flex">
+                        <h3>Manicure e Pedicure</h3>
+                        <p>65 R$</p>
+                    </span>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
+                </div>
+            </section>
 
-        <section class="servico card flex">
-            <img src="static/img/logomaior.svg" alt="Serviços">
-            <div class="flex">
-                <span class="flex">
-                    <h3>Escova e Hidratação</h3>
-                    <p>120 R$</p>
-                </span>
-                <a class="button button_servico" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
-            </div>
-        </section>
+            <section class="servico card flex">
+                <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Serviços">
+                <div class="flex">
+                    <span class="flex">
+                        <h3>Escova e Hidratação</h3>
+                        <p>120 R$</p>
+                    </span>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
+                </div>
+            </section>
 
-        <section class="servico card flex">
-            <img src="static/img/logomaior.svg" alt="Serviços">
-            <div class="flex">
-                <span class="flex">
-                    <h3>Maquiagem Social</h3>
-                    <p>180 R$</p>
-                </span>
-                <a class="button button_servico" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
-            </div>
-        </section>
+            <section class="servico card flex">
+                <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Serviços">
+                <div class="flex">
+                    <span class="flex">
+                        <h3>Maquiagem Social</h3>
+                        <p>180 R$</p>
+                    </span>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
+                </div>
+            </section>
 
-        <section class="servico card flex">
-            <img src="static/img/logomaior.svg" alt="Serviços">
-            <div class="flex">
-                <span class="flex">
-                    <h3>Design de Sobrancelhas</h3>
-                    <p>45 R$</p>
-                </span>
-                <a class="button button_servico" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
-            </div>
-        </section>
+            <section class="servico card flex">
+                <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Serviços">
+                <div class="flex">
+                    <span class="flex">
+                        <h3>Design de Sobrancelhas</h3>
+                        <p>45 R$</p>
+                    </span>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
+                </div>
+            </section>
 
-        <section class="servico card flex">
-            <img src="static/img/logomaior.svg" alt="Serviços">
-            <div class="flex">
-                <span class="flex">
-                    <h3>Coloração Global</h3>
-                    <p>210 R$</p>
-                </span>
-                <a class="button button_servico" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
-            </div>
-        </section>
+            <section class="servico card flex">
+                <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Serviços">
+                <div class="flex">
+                    <span class="flex">
+                        <h3>Coloração Global</h3>
+                        <p>210 R$</p>
+                    </span>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
+                </div>
+            </section>
 
-        <section class="servico card flex">
-            <img src="static/img/logomaior.svg" alt="Serviços">
-            <div class="flex">
-                <span class="flex">
-                    <h3>Limpeza de Pele Profunda</h3>
-                    <p>140 R$</p>
-                </span>
-                <a class="button button_servico" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
-            </div>
-        </section>
+            <section class="servico card flex">
+                <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Serviços">
+                <div class="flex">
+                    <span class="flex">
+                        <h3>Limpeza de Pele Profunda</h3>
+                        <p>140 R$</p>
+                    </span>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
+                </div>
+            </section>
 
-        <section class="servico card flex">
-            <img src="static/img/logomaior.svg" alt="Serviços">
-            <div class="flex">
-                <span class="flex">
-                    <h3>Massagem Relaxante</h3>
-                    <p>160 R$</p>
-                </span>
-                <a class="button button_servico" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
-            </div>
-        </section>
+            <section class="servico card flex">
+                <img src="{{ url_for('static', filename='img/logomaior.svg') }}" alt="Serviços">
+                <div class="flex">
+                    <span class="flex">
+                        <h3>Massagem Relaxante</h3>
+                        <p>160 R$</p>
+                    </span>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
+                </div>
+            </section>
+        </div>
     </div>
 {% endblock %}

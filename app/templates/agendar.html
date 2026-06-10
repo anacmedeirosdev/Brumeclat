@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block navegação %}
+    <li><a class="button" href="{{ url_for('auth.home') }}">Casa</a></li>
+    <li><a class="button" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a></li>
+    <li><a class="button" href="{{ url_for('agendamento.historico') }}">Histórico</a></li>
+{% endblock %}
+{% block conteúdo %}
+<div class="flex" style="justify-content: center; align-items: center; padding: 60px 0; width: 100%;">
+    <main class="flex login_card" style="max-width: 560px; width: 100%; box-sizing: border-box;">
+        
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #812B2B; margin-bottom: 5px;">Solicitar Agendamento</h2>
+        <p style="font-family: 'Inter', sans-serif; font-size: 14px; color: #555; margin-bottom: 15px; text-align: center;">
+            Confirme seus dados cadastrais e escolha o horário.
+        </p>
+
+        <form class="flex" action="{{ url_for('agendamento.fazer_agendamento') }}" method="POST" style="width: 100%; align-items: center;">
+            
+            <div class="campos flex" style="align-self: stretch;">
+                <label for="nome">Seu Nome</label>
+                <input type="text" id="nome" name="nome" value="{{ current_user.nome }}" readonly style="background: #EAEAEA; color: #666; cursor: not-allowed; width: 100%; box-sizing: border-box;">
+            </div>
+
+            <div class="campos flex" style="align-self: stretch;">
+                <label for="telefone">Telefone / WhatsApp</label>
+                <input type="text" id="telefone" name="telefone" value="{{ current_user.telefone }}" readonly style="background: #EAEAEA; color: #666; cursor: not-allowed; width: 100%; box-sizing: border-box;">
+            </div>
+
+            <div class="campos flex" style="align-self: stretch;">
+                <label for="servico">Serviço Desejado</label>
+                <select id="servico" name="servico" required style="width: 100%; padding: 16px 24px; border: none; border-radius: 24px; background: #DEDBDB; color: #141010; font-family: Inter; font-size: 14px; box-sizing: border-box; -webkit-appearance: none; -moz-appearance: none; appearance: none;">
+                    <option value="" disabled {% if not servico_selecionado %}selected{% endif %}>Selecione um serviço</option>
+                    <option value="Corte de Cabelo" {% if servico_selecionado == 'Corte de Cabelo' %}selected{% endif %}>Corte de Cabelo - R$ 90</option>
+                    <option value="Manicure e Pedicure" {% if servico_selecionado == 'Manicure e Pedicure' %}selected{% endif %}>Manicure e Pedicure - R$ 65</option>
+                    <option value="Escova e Hidratação" {% if servico_selecionado == 'Escova e Hidratação' %}selected{% endif %}>Escova e Hidratação - R$ 120</option>
+                    <option value="Maquiagem Social" {% if servico_selecionado == 'Maquiagem Social' %}selected{% endif %}>Maquiagem Social - R$ 180</option>
+                    <option value="Design de Sobrancelhas" {% if servico_selecionado == 'Design de Sobrancelhas' %}selected{% endif %}>Design de Sobrancelhas - R$ 45</option>
+                    <option value="Coloração Global" {% if servico_selecionado == 'Coloração Global' %}selected{% endif %}>Coloração Global - R$ 210</option>
+                    <option value="Limpeza de Pele Profunda" {% if servico_selecionado == 'Limpeza de Pele Profunda' %}selected{% endif %}>Limpeza de Pele Profunda - R$ 140</option>
+                    <option value="Massagem Relaxante" {% if servico_selecionado == 'Massagem Relaxante' %}selected{% endif %}>Massagem Relaxante - R$ 160</option>
+                </select>
+            </div>
+
+            <div class="campos flex" style="align-self: stretch;">
+                <label for="data">Escolha a Data</label>
+                <input type="date" id="data" name="data" required style="width: 100%; box-sizing: border-box;">
+            </div>
+
+            <div class="campos flex" style="align-self: stretch;">
+                <label for="horario">Escolha o Horário</label>
+                <input type="time" id="horario" name="horario" required style="width: 100%; box-sizing: border-box;">
+            </div>
+
+            <button class="button btn-primario" type="submit" style="margin-top: 15px; cursor: pointer; width: 100%; justify-content: center;">Enviar Agendamento</button>
+        </form>
+        
+        <div class="flex sign" style="margin-top: 10px;">
+            <a class="button" style="background-color: #E6A4A4;" href="{{ url_for('auth.home') }}">Voltar aos Serviços</a>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento Confirmado - Bruméclat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="flex login" style="flex-direction: column; height: 100vh; background-color: #fafafa; gap: 20px;">
+        
+        <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 42px; color: #812B2B; font-weight: 400; margin-bottom: 5px; letter-spacing: 2px;">
+            Bruméclat
+        </h1>
+
+        <main class="flex login_card" style="width: 100%; max-width: 500px; text-align: center; box-sizing: border-box; background: #FFF;">
+            
+            <div style="width: 72px; height: 72px; background-color: #D4EDDA; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 10px auto; border: 1px solid #C3E6CB;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#155724" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+
+            <div class="flex" style="flex-direction: column; gap: 8px; width: 100%; align-items: center;">
+                <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 30px; color: #812B2B; font-weight: 600;">
+                    Solicitação Concluída!
+                </h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 14px; color: #141010; font-weight: 500; line-height: 140%; max-width: 380px; text-align: center;">
+                    Seu agendamento foi encaminhado com sucesso e agora está <strong>aguardando a confirmação</strong> dos nossos administradores.
+                </p>
+            </div>
+
+            <div class="flex" style="flex-direction: column; gap: 14px; width: 100%; align-items: center; margin-top: 10px;">
+                
+                <a class="button" href="{{ url_for('agendamento.historico') }}" 
+                   style="background-color: #E6A4A4; color: #812B2B; font-weight: 600; width: 100%; max-width: 428px; padding: 16px 0; border-radius: 24px; justify-content: center; font-size: 13px; text-align: center; box-sizing: border-box; transition: background 0.2s;">
+                    Acompanhar meus Agendamentos
+                </a>
+                
+                <a class="button" href="{{ url_for('auth.home') }}" 
+                   style="background-color: #DEDBDB; color: #141010; font-weight: 500; width: 100%; max-width: 428px; padding: 14px 0; border-radius: 24px; justify-content: center; font-size: 12px; text-align: center; box-sizing: border-box; transition: background 0.2s;">
+                    Voltar para o Início
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>

@@ -1,4 +1,9 @@
 {% extends "base.html" %} 
+{% block navegação %}
+    <li><a class="button" href="{{ url_for('auth.home') }}">Casa</a></li>
+    <li><a class="button" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a></li>
+    <li><a class="button" href="{{ url_for('auth.login') }}">Entrar</a></li>
+{% endblock %}
 {% block banner %}
     <div class="container_img">
         <img class="banner container_img" src="static/img/BannerDesktop.svg" alt="Banner"> 
@@ -47,7 +52,7 @@
                         <h3>Corte de Cabelo</h3>
                         <p>90 R$</p>
                     </span>
-                    <a class="button" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento', servico='Corte de Cabelo') }}">Agendar</a>
                 </div>
             </section>
             <section class="servico card flex">
@@ -57,7 +62,7 @@
                         <h3>Corte de Cabelo</h3>
                         <p>90 R$</p>
                     </span>
-                    <a class="button" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
+                    <a class="button" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
                 </div>
             </section>
             <section class="servico card flex">
@@ -67,7 +72,7 @@
                         <h3>Corte de Cabelo</h3>
                         <p>90 R$</p>
                     </span>
-                    <a class="button button_servico" href="{{ url_for('agendamento.dashboard') }}">Agendar</a>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
                 </div>
             </section>
         </div>
