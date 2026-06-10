@@ -56,11 +56,7 @@
                         <div class="campos flex" style="align-self: stretch;">
                             <label style="margin-bottom: 6px; display: block;">Ação / Status do Atendimento</label>
                             
-                            <select name="status" onchange="this.form.submit()" style="width: 100%; padding: 16px 24px; border: 1px solid #DEDBDB; border-radius: 24px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; box-sizing: border-box; cursor: pointer; outline: none;
-                                {% if agendamento.status == 'pendente' %} background-color: #FFF3CD; color: #856404; border-color: #FFEBAA;
-                                {% elif agendamento.status == 'concluido' %} background-color: #D4EDDA; color: #155724; border-color: #C3E6CB;
-                                {% else %} background-color: #F8D7DA; color: #721C24; border-color: #F5C6CB; {% endif %}">
-                                
+                            <select name="status" onchange="this.form.submit()" class="status-{{ agendamento.status }}"tyle="width: 100%; padding: 16px 24px; border: 1px solid; border-radius: 24px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; box-sizing: border-box; cursor: pointer; outline: none;">
                                 <option value="pendente" {% if agendamento.status == 'pendente' %}selected{% endif %}>Aguardando Confirmação</option>
                                 <option value="concluido" {% if agendamento.status == 'concluido' %}selected{% endif %}>Confirmar / Concluído</option>
                                 <option value="cancelado" {% if agendamento.status == 'cancelado' %}selected{% endif %}>Cancelar Agendamento</option>
