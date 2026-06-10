@@ -25,6 +25,7 @@ def dashboard():
     )
 
 @admin_bp.route('/admin/alterar/<int:id>', methods=['POST'])
+@login_required
 def alterar_status(id):
     if not current_user.is_authenticated or current_user.tipo != 'admin':
         return redirect(url_for('auth.login'))

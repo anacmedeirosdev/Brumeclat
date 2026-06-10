@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block título %}Painel Administrativo - Bruméclat{% endblock %}
+
+{% block conteúdo %}
+<div class="flex" style="flex-direction: column; width: 100%; min-height: 80vh; padding: 40px 0; gap: 32px; box-sizing: border-box; align-items: center;">
+    
+    <div class="flex" style="flex-direction: column; align-items: center; gap: 8px;">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 36px; color: #812B2B; font-weight: 400; letter-spacing: 1px; margin: 0;">Painel de Controle</h2>
+        <p style="font-family: 'Inter', sans-serif; font-size: 13px; color: #666; margin: 0;">Gerenciamento e atualização de solicitações em tempo real</p>
+    </div>
+
+    <div class="flex" style="flex-direction: row; justify-content: center; gap: 16px; width: 100%; max-width: 560px; box-sizing: border-box; padding: 0 10px;">
+        
+        <div class="flex" style="flex: 1; background: #FFF; border: 2px solid #E6A4A4; border-radius: 16px; padding: 12px; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+            <span style="font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #812B2B;">{{ pendentes }}</span>
+            <span style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: #812B2B;">Pendentes</span>
+        </div>
+
+        <div class="flex" style="flex: 1; background: #FFF; border: 2px solid #E6A4A4; border-radius: 16px; padding: 12px; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+            <span style="font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #812B2B;">{{ concluidos }}</span>
+            <span style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: #812B2B;">Agendados</span>
+        </div>
+
+        <div class="flex" style="flex: 1; background: #FFF; border: 2px solid #E6A4A4; border-radius: 16px; padding: 12px; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+            <span style="font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #812B2B;">{{ cancelados }}</span>
+            <span style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: #812B2B;">Cancelados</span>
+        </div>
+
+    </div>
+
+    <main class="flex login_card" style="width: 100%; max-width: 560px; gap: 32px; box-sizing: border-box; margin: 0 auto; background: #FFF;">
+        
+        <div class="flex" style="flex-direction: column; gap: 32px; width: 100%;">
+            {% if agendamentos %}
+                {% for agendamento in agendamentos %}
+                    
+                    <form class="flex" action="{{ url_for('admin.alterar_status', id=agendamento.id) }}" method="POST" style="flex-direction: column; gap: 16px; padding-bottom: 32px; border-bottom: 2px dashed #E6A4A4; width: 100%;">
+                        
+                        <div class="campos flex" style="align-self: stretch;">
+                            <label style="margin-bottom: 6px; display: block;">Serviço Solicitado</label>
+                            <input class="flex" type="text" value="{{ agendamento.servico }}" readonly style="background-color: #EAEAEA; font-weight: 600; color: #141010; cursor: not-allowed; width: 100%; box-sizing: border-box;">
+                        </div>
+
+                        <div class="flex" style="justify-content: space-between; align-self: stretch; gap: 20px; width: 100%;">
+                            <div class="campos flex" style="flex: 1;">
+                                <label style="margin-bottom: 6px; display: block;">Data</label>
+                                <input class="flex" type="text" value="{{ agendamento.data.strftime('%d/%m/%Y') }}" readonly style="background-color: #EAEAEA; cursor: not-allowed; width: 100%; box-sizing: border-box;">
+                            </div>
+                            <div class="campos flex" style="flex: 1;">
+                                <label style="margin-bottom: 6px; display: block;">Horário</label>
+                                <input class="flex" type="text" value="{{ agendamento.horario.strftime('%H:%M') }}" readonly style="background-color: #EAEAEA; cursor: not-allowed; width: 100%; box-sizing: border-box;">
+                            </div>
+                        </div>
+
+                        <div class="campos flex" style="align-self: stretch;">
+                            <label style="margin-bottom: 6px; display: block;">Ação / Status do Atendimento</label>
+                            
+                            <select name="status" onchange="this.form.submit()" style="width: 100%; padding: 16px 24px; border: 1px solid #DEDBDB; border-radius: 24px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; box-sizing: border-box; cursor: pointer; outline: none;
+                                {% if agendamento.status == 'pendente' %} background-color: #FFF3CD; color: #856404; border-color: #FFEBAA;
+                                {% elif agendamento.status == 'concluido' %} background-color: #D4EDDA; color: #155724; border-color: #C3E6CB;
+                                {% else %} background-color: #F8D7DA; color: #721C24; border-color: #F5C6CB; {% endif %}">
+                                
+                                <option value="pendente" {% if agendamento.status == 'pendente' %}selected{% endif %}>Aguardando Confirmação</option>
+                                <option value="concluido" {% if agendamento.status == 'concluido' %}selected{% endif %}>Confirmar / Concluído</option>
+                                <option value="cancelado" {% if agendamento.status == 'cancelado' %}selected{% endif %}>Cancelar Agendamento</option>
+                            </select>
+                        </div>
+
+                    </form>
+                {% endfor %}
+            {% else %}
+                <div class="flex" style="flex-direction: column; align-items: center; padding: 40px 0; gap: 16px; width: 100%;">
+                    <p style="font-family: 'Inter', sans-serif; color: #777; margin: 0;">Nenhuma solicitação encontrada no banco de dados.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="flex sign" style="margin-top: 10px; width: 100%; justify-content: center;">
+            <a class="button" style="background-color: #DEDBDB; color: #141010; padding: 12px 24px;" href="{{ url_for('auth.logout') }}">Sair do Painel</a>
+        </div>
+    </main>
+</div>
+{% endblock %}

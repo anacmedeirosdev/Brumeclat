@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block título %}Meu Perfil - Bruméclat{% endblock %}
+
+{% block conteúdo %}
+<div class="flex" style="width: 100%; min-height: 75vh; justify-content: center; align-items: center; padding: 40px 0; box-sizing: border-box;">
+    
+    <main class="flex login_card" style="width: 100%; max-width: 500px; gap: 24px; box-sizing: border-box; background: #FFF;">
+        
+        <div class="flex" style="flex-direction: column; align-items: center; gap: 6px; text-align: center;">
+            <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #812B2B; font-weight: 500; margin: 0;">Minha Conta</h2>
+            <p style="font-family: 'Inter', sans-serif; font-size: 13px; color: #666; margin: 0;">Confira os seus dados de cadastro no sistema</p>
+        </div>
+
+        <div class="flex" style="flex-direction: column; gap: 16px; width: 100%;">
+            
+            <div class="campos flex" style="align-self: stretch;">
+                <label style="margin-bottom: 6px; display: block; font-weight: 500;">Nome Completo</label>
+                <input class="flex" type="text" value="{{ current_user.nome }}" readonly style="background-color: #EAEAEA; color: #141010; font-weight: 600; cursor: not-allowed; width: 100%; box-sizing: border-box;">
+            </div>
+
+            <div class="campos flex" style="align-self: stretch;">
+                <label style="margin-bottom: 6px; display: block; font-weight: 500;">Telefone de Contato</label>
+                <input class="flex" type="text" value="{{ current_user.telefone }}" readonly style="background-color: #EAEAEA; color: #141010; font-weight: 600; cursor: not-allowed; width: 100%; box-sizing: border-box;">
+            </div>
+
+            <div class="campos flex" style="align-self: stretch;">
+                <label style="margin-bottom: 6px; display: block; font-weight: 500;">Tipo de Perfil</label>
+                <input class="flex" type="text" value="Cliente" readonly style="background-color: #EAEAEA; color: #666; font-weight: 500; cursor: not-allowed; width: 100%; box-sizing: border-box; text-transform: capitalize;">
+            </div>
+
+        </div>
+
+        <div class="flex" style="width: 100%; justify-content: center; margin-top: 10px;">
+            <a class="button" href="{{ url_for('auth.home') }}" style="background-color: #DEDBDB; color: #141010; width: 100%; justify-content: center; padding: 14px 0; border-radius: 24px; font-weight: 500; text-align: center;">
+                Voltar para o Início
+            </a>
+        </div>
+
+    </main>
+</div>
+{% endblock %}
