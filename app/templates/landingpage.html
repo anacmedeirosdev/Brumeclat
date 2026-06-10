@@ -46,7 +46,7 @@
         </section>
         <div class="servicos flex">
             <section class="servico card flex">
-                <img src="static/img/logomaior.svg" alt="Serviços">
+                <img src="static/img/corte.jpg" alt="Serviços">
                 <div class="flex">
                     <span class="flex">
                         <h3>Corte de Cabelo</h3>
@@ -56,21 +56,22 @@
                 </div>
             </section>
             <section class="servico card flex">
-                <img src="static/img/logomaior.svg" alt="Serviços">
+                <img src="{{ url_for('static', filename='img/manicure.jpg') }}" alt="Serviços">
                 <div class="flex">
                     <span class="flex">
-                        <h3>Corte de Cabelo</h3>
-                        <p>90 R$</p>
+                        <h3>Manicure e Pedicure</h3>
+                        <p>65 R$</p>
                     </span>
-                    <a class="button" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
+                    <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
                 </div>
             </section>
+
             <section class="servico card flex">
-                <img src="static/img/logomaior.svg" alt="Serviços">
+                <img src="{{ url_for('static', filename='img/hidratação.png') }}" alt="Serviços">
                 <div class="flex">
                     <span class="flex">
-                        <h3>Corte de Cabelo</h3>
-                        <p>90 R$</p>
+                        <h3>Escova e Hidratação</h3>
+                        <p>120 R$</p>
                     </span>
                     <a class="button button_servico" href="{{ url_for('agendamento.fazer_agendamento') }}">Agendar</a>
                 </div>
